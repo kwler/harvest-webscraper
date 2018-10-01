@@ -1,3 +1,23 @@
 language: node_js
 node_js:
   - "8"
+# Cache our Gcloud SDK between commands
+cache:
+  directories:
+  - "$HOME/google-cloud-sdk/"
+
+before_install:
+# refer to this instruction for securing the credentials
+# https://cloud.google.com/solutions/continuous-delivery-with-travis-ci
+  - openssl aes-256-cbc -K $encrypted_bdfe652c5f58_key -iv $encrypted_bdfe652c5f58_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
+  - tar -xzf credentials.tar.gz
+# If the SDK is not already cached, download it and unpack it
+  - if [ ! -d ${HOME}/google-cloud-sdk ]; then
+      curl https://sdk.cloud.google.com | bash;
+    fi
+# Here we use the decrypted service account credentials to authenticate the command line tool
+  - gcloud auth activate-service-account --key-file travis-ci-credentials.json.json
+
+install:
+  - gcloud config set project $GCP_PROJECT
+  - gcloud functions deploy $GCP_FUNCTION_NAME --runtime nodejs8 --trigger-topic $GCP_TRIGGER_TOPIC --entry-point pubSub --memory $GCP_FUNCTION_MEMORY --region $GCP_REGION
