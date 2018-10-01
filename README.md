@@ -18,6 +18,14 @@ gcloud functions deploy harvest-webscraper \
 --region us-central1
 ```
 
+## Developer Notes
+- install GCloud CLI and setup account
+- initial setup
+```
+npm install
+npm install -g ava
+```
+
 #### Notes for IntelliJ Users
 - Please use Windows Linux subsystem and install NodeJS "Settings > Languages and Frameworks > Node.JS and NPM > Node Interpreter: Ubuntu"
 - Settings > Languages and Frameworks > Javascript > Javascript Language Version
