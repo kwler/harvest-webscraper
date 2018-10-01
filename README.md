@@ -17,3 +17,7 @@ gcloud functions deploy harvest-webscraper \
 --memory 1024mb \
 --region us-central1
 ```
+
+#### Notes for IntelliJ Users
+- Please use Windows Linux subsystem and install NodeJS "Settings > Languages and Frameworks > Node.JS and NPM > Node Interpreter: Ubuntu"
+- Settings > Languages and Frameworks > Javascript > Javascript Language Version

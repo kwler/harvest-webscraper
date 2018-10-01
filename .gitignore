@@ -71,3 +71,10 @@ typings/
 
 # Serverless directories
 .serverless
+
+# IntelliJ IDEA
+.idea
+*.iml
+
+# Sort of useless, damn thing keeps regenerating
+package-lock.json
