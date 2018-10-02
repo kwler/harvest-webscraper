@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "8"
 
-sudo: true
+sudo: required
+dist: trusty
 
 env:
 - CLOUDSDK_CORE_DISABLE_PROMPTS=1 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
@@ -12,11 +13,10 @@ before_install:
 # https://cloud.google.com/solutions/continuous-delivery-with-travis-ci
   - openssl aes-256-cbc -K $encrypted_bdfe652c5f58_key -iv $encrypted_bdfe652c5f58_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
   - tar -xzf credentials.tar.gz
-  - sudo su
-  - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-  - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-  - apt-get update -y
-  - apt-get install google-cloud-sdk -y
+  - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+  - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  - sudo apt-get update -y
+  - sudo apt-get install google-cloud-sdk -y
   - gcloud --version
   - gcloud auth activate-service-account --key-file travis-ci-credentials.json
 
