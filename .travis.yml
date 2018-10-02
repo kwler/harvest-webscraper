@@ -19,7 +19,7 @@ before_install:
       curl https://sdk.cloud.google.com | bash;
     fi
 # Here we use the decrypted service account credentials to authenticate the command line tool
-  - gcloud auth activate-service-account --key-file travis-ci-credentials.json.json
+  - gcloud auth activate-service-account --key-file travis-ci-credentials.json
 
 install:
   - gcloud config set project $GCP_PROJECT
