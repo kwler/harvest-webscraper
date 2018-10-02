@@ -20,5 +20,5 @@ LICENSE
 README.md
 credentials.tar.gz
 credentials.tar.gz.enc
-travis-ci.credentials.json
+travis-ci-credentials.json
 package-lock.json
