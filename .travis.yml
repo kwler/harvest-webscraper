@@ -3,7 +3,6 @@ node_js:
   - "8"
 
 sudo: required
-#dist: trusty
 
 env:
 - CLOUDSDK_CORE_DISABLE_PROMPTS=1 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
