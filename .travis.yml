@@ -18,6 +18,7 @@ before_install:
   - if [ ! -d ${HOME}/google-cloud-sdk ]; then
       curl https://sdk.cloud.google.com | bash;
     fi
+  - gcloud components update
   - gcloud --version
 # Here we use the decrypted service account credentials to authenticate the command line tool
   - gcloud auth activate-service-account --key-file travis-ci-credentials.json
