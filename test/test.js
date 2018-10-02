@@ -15,5 +15,5 @@ test(`pubSub: should print Upd8`, async t => {
   // Call tested function and verify its behavior
   await pubSub(event);
   t.true(consoleLog.calledWith(`Upd8`));
-  t.true(consoleLog.calledWith(name));
+  //t.true(consoleLog.calledWith(`HTML`));
 });
