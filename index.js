@@ -14,11 +14,11 @@ async function meh(url) {
  * @param {!Object} event Event payload.
  * @param {!Object} context Metadata for the event.
  */
-exports.pubSub = (event, context) => {
+exports.pubSub = async (event, context) => {
   const pubsubMessage = event.data;
   console.log('Upd8');
   const url = Buffer.from(pubsubMessage, 'base64').toString();
-  const result = meh(url);
+  const result = await meh(url);
 };
 
 
