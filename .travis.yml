@@ -23,4 +23,4 @@ before_install:
 
 install:
   - gcloud config set project $GCP_PROJECT
-  - gcloud functions deploy $GCP_FUNCTION_NAME --runtime nodejs8 --trigger-topic $GCP_TRIGGER_TOPIC --entry-point pubSub --memory $GCP_FUNCTION_MEMORY --region $GCP_REGION
+  - gcloud beta functions deploy $GCP_FUNCTION_NAME --runtime nodejs8 --trigger-topic $GCP_TRIGGER_TOPIC --entry-point pubSub --memory $GCP_FUNCTION_MEMORY --region $GCP_REGION
