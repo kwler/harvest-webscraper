@@ -16,6 +16,13 @@ gcloud functions deploy harvest-webscraper \
 --entry-point pubSub \
 --memory 1024mb \
 --region us-central1
+
+gcloud beta functions deploy harvest-webscraper \
+--region us-central1 \
+--runtime nodejs8 \
+--trigger-topic harvest-webscraper \
+--entry-point pubSub \
+--memory 1024mb
 ```
 
 ## Developer Notes
