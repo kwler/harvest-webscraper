@@ -3,7 +3,7 @@ node_js:
   - "8"
 
 sudo: required
-dist: trusty
+#dist: trusty
 
 env:
 - CLOUDSDK_CORE_DISABLE_PROMPTS=1 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
@@ -19,8 +19,7 @@ before_install:
   - sudo apt-get install google-cloud-sdk -y
   - gcloud --version
   - gcloud auth activate-service-account --key-file travis-ci-credentials.json
-  - npm install ava -g
-
-install:
   - gcloud config set project $GCP_PROJECT
+
+after_success:
   - gcloud beta functions deploy $GCP_FUNCTION_NAME --region $GCP_REGION --runtime nodejs8 --trigger-topic $GCP_TRIGGER_TOPIC --entry-point pubSub --memory $GCP_FUNCTION_MEMORY
