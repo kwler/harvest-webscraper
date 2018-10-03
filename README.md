@@ -4,7 +4,7 @@
 A simple web scraper that takes a snapshot of a target website. This works perfectly well on GCP Cloud Functions NodeJS8, but you may need to set things up in [local](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md). 
 
 ## TODO
-- use TypeScript, and figure out how to setup stuffs in VSCode
+- use [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html), and figure out how to setup stuffs in VSCode
 - install [dts types](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
 ## Unit Test
@@ -35,6 +35,10 @@ gcloud beta functions deploy harvest-webscraper \
 ```
 npm install
 npm install -g ava
+```
+- [typescript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+```
+sudo npm install -g typescript
 ```
 
 #### ERROR: Failed to launch chrome!
