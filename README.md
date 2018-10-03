@@ -1,7 +1,7 @@
 # Harvest: Web Scraper
 [![Build Status](https://travis-ci.org/kwler/harvest-webscraper.svg?branch=master)](https://travis-ci.org/kwler/harvest-webscraper)
 
-A simple web scraper that takes a snapshot of a target website
+A simple web scraper that takes a snapshot of a target website. This works perfectly well on GCP Cloud Functions NodeJS8, but you may need to set things up in [local](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md). 
 
 ## Unit Test
 ```
@@ -31,6 +31,51 @@ gcloud beta functions deploy harvest-webscraper \
 ```
 npm install
 npm install -g ava
+```
+
+#### ERROR: Failed to launch chrome!
+- im running node on [Ubuntu](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md)
+```
+sudo apt-get install \
+gconf-service \
+libasound2 \
+libatk1.0-0 \
+libatk-bridge2.0-0 \
+libc6 \
+libcairo2 \
+libcups2 \
+libdbus-1-3 \
+libexpat1 \
+libfontconfig1 \
+libgcc1 \
+libgconf-2-4 \
+libgdk-pixbuf2.0-0 \
+libglib2.0-0 \
+libgtk-3-0 \
+libnspr4 \
+libpango-1.0-0 \
+libpangocairo-1.0-0 \
+libstdc++6 \
+libx11-6 \
+libx11-xcb1 \
+libxcb1 \
+libxcomposite1 \
+libxcursor1 \
+libxdamage1 \
+libxext6 \
+libxfixes3 \
+libxi6 \
+libxrandr2 \
+libxrender1 \
+libxss1 \
+libxtst6 \
+ca-certificates \
+fonts-liberation \
+libappindicator1 \
+libnss3 \
+lsb-release \
+xdg-utils \
+wget
 ```
 
 #### Notes for IntelliJ Users
