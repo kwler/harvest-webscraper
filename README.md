@@ -3,6 +3,10 @@
 
 A simple web scraper that takes a snapshot of a target website. This works perfectly well on GCP Cloud Functions NodeJS8, but you may need to set things up in [local](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md). 
 
+## TODO
+- use TypeScript, and figure out how to setup stuffs in VSCode
+- install [dts types](https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 ## Unit Test
 ```
 npm test
