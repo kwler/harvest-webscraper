@@ -1,16 +1,5 @@
-const puppeteer = require('puppeteer');
-
-async function meh() {
-    const url = 'https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md';
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
-    const page = await browser.newPage();
-    await page.goto(url, {
-        timeout: 0,
-        waitUntil: 'networkidle0'
-    });
-    const html = await page.$eval('body', e=> e.innerHTML);
-    console.log('HTML: ' + html)
-}
+//@ts-check
+const Scraper = require('./scraper')
 
 /**
  * Triggered from a message on a Cloud Pub/Sub topic.
@@ -19,10 +8,9 @@ async function meh() {
  * @param {!Object} context Metadata for the event.
  */
 exports.pubSub = async (event, context) => {
-  const pubsubMessage = event.data;
-  console.log('Upd8');
-  const url = Buffer.from(pubsubMessage, 'base64').toString();
-  const result = await meh();
+  const message = Buffer.from(event.data, 'base64').toString();
+  const scraper = new Scraper();
+  const result = await scraper.meh();
 };
 
 
