@@ -78,3 +78,6 @@ typings/
 
 # Sort of useless, damn thing keeps regenerating
 package-lock.json
+
+# Firebase
+.firebaserc
