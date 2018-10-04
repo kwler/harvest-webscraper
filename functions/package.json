@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha -r ts-node/register test/**.spec.ts",
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
     "serve": "npm run build && firebase serve --only functions",
