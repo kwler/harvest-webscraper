@@ -9,7 +9,7 @@ A simple web scraper that takes a snapshot of a target website. This works perfe
 
 ## Unit Test
 ```
-npm test
+npm test --prefix ./functions
 ```
 
 ## Deploy
@@ -21,8 +21,8 @@ firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only funct
 - install GCloud CLI and setup account
 - initial setup
 ```
-npm install
-npm install -g ava
+npm install -g firebase-tools
+npm install --prefix ./functions
 ```
 - [typescript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 ```
