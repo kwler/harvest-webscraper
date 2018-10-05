@@ -13,6 +13,8 @@ install:
 
 script:
   - npm test --prefix ./functions
+  - firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only functions
 
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only functions
+  - echo "Done Done Done Done!!!"
+  
