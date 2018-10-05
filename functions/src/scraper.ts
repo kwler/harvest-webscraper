@@ -1,5 +1,16 @@
 import * as puppeteer from 'puppeteer';
 
+export class ScraperRequest {
+    id: string;
+    initialPage: string;
+    
+}
+
+export class ScraperResponse {
+    id: string;
+    success: boolean;
+}
+
 /**
  * 
  */
@@ -23,15 +34,4 @@ export class Scraper {
         return response;
     }
     
-}
-
-export class ScraperRequest {
-    id: string;
-    initialPage: string;
-    
-}
-
-export class ScraperResponse {
-    id: string;
-    success: boolean;
 }
