@@ -1,10 +1,6 @@
 # Harvest: Web Scraper
 [![Build Status](https://travis-ci.org/kwler/harvest-webscraper.svg?branch=master)](https://travis-ci.org/kwler/harvest-webscraper)
 
-## TODO
-- use [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html), and figure out how to setup stuffs in VSCode
-- install [dts types](https://github.com/DefinitelyTyped/DefinitelyTyped)
-
 ## Features
 A simple web scraper that takes a snapshot of a target website.
 
