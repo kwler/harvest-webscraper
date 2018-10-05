@@ -7,6 +7,10 @@ export async function pubSubToScraper(message: Message, context: EventContext) {
     console.log(message);
     console.log("Context:");
     console.log(context);
+
+    let messageBody = message.data ? Buffer.from(message.data, 'base64').toString() : '{}';
+    console.log('Body:');
+    console.log(messageBody);
 }
 
 export async function httpToScraper(req: express.Request, resp: express.Response) {
