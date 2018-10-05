@@ -1,11 +1,18 @@
 # Harvest: Web Scraper
 [![Build Status](https://travis-ci.org/kwler/harvest-webscraper.svg?branch=master)](https://travis-ci.org/kwler/harvest-webscraper)
 
-A simple web scraper that takes a snapshot of a target website. This works perfectly well on GCP Cloud Functions NodeJS8, but you may need to set things up in [local](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md). 
-
 ## TODO
 - use [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html), and figure out how to setup stuffs in VSCode
 - install [dts types](https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+## Features
+A simple web scraper that takes a snapshot of a target website.
+
+- navigate websites
+- take a screenshot
+- store the html contents
+- write data to PubSub
+- write data to Cloud Storage
 
 ## Unit Test
 ```
