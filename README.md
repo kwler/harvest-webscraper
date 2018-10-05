@@ -8,12 +8,15 @@
 ## Features
 A simple web scraper that takes a snapshot of a target website.
 
-- wait for "orders" from PubSub
-- navigate websites
-- take a screenshot
-- store the html contents
-- write data to PubSub
-- write data to Cloud Storage
+- [ ] wait for "orders" from HTTP
+- [ ] wait for "orders" from PubSub
+- [ ] navigate websites
+- [ ] take a screenshot
+- [ ] store the html contents
+- [ ] write results to HTTP response
+- [ ] write results to PubSub
+- [ ] write results to Cloud Storage
+- [ ] perform other commands aside from basic navigation
 
 ## Unit Test
 ```
