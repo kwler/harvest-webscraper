@@ -1,9 +1,9 @@
 # Harvest: Web Scraper
 [![Build Status](https://travis-ci.org/kwler/harvest-webscraper.svg?branch=master)](https://travis-ci.org/kwler/harvest-webscraper)
 
-## Features
-A simple web scraper that takes a snapshot of a target website.
+A simple web scraper that takes a snapshot of a target website. The keyword being "simple"; this scraper can take in and store as much data as it can, perform navigation, and store the result in multiple formats, but will never perform data extraction/processing, that step will be performed further down the line on a different project. This protects us from having to deal with site restructuring messing up with data extraction.
 
+## Features
 - [ ] wait for "orders" from HTTP
 - [ ] wait for "orders" from PubSub
 - [ ] navigate websites
@@ -14,15 +14,7 @@ A simple web scraper that takes a snapshot of a target website.
 - [ ] write results to Cloud Storage
 - [ ] perform other commands aside from basic navigation
 
-## Unit Test
-```
-npm test --prefix ./functions
-```
 
-## Deploy
-```
-firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only functions
-```
 
 ## Developer Notes
 - install GCloud/Firebase CLI and setup account
@@ -34,6 +26,16 @@ npm install --prefix ./functions
 - [typescript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 ```
 sudo npm install -g typescript
+```
+
+#### Unit Test
+```
+npm test --prefix ./functions
+```
+
+#### Deploy
+```
+firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only functions
 ```
 
 #### ERROR: Failed to launch chrome!
