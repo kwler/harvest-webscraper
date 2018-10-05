@@ -10,6 +10,7 @@ install:
   - npm install -g firebase-tools
   - npm install --prefix ./functions
   - npm tsc --version
+  - npm ls --prefix ./functions
 
 script:
   - npm test --prefix ./functions
