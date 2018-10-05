@@ -8,6 +8,7 @@
 ## Features
 A simple web scraper that takes a snapshot of a target website.
 
+- wait for "orders" from PubSub
 - navigate websites
 - take a screenshot
 - store the html contents
