@@ -18,7 +18,7 @@ firebase deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT --only funct
 ```
 
 ## Developer Notes
-- install GCloud CLI and setup account
+- install GCloud/Firebase CLI and setup account
 - initial setup
 ```
 npm install -g firebase-tools
