@@ -13,8 +13,16 @@ A simple web scraper that takes a snapshot of a target website. The keyword bein
 - [ ] write results to PubSub
 - [ ] write results to Cloud Storage
 - [ ] perform other commands aside from basic navigation
+- [ ] security
+- [ ] DoS mitigation
 
-
+## Developer "Quality-of-Life" Features
+- [x] continuous integration
+- [x] TypeScript
+- [x] unit tests
+- [ ] unit test mocks
+- [ ] integration tests running on local emulator
+- [ ] environment variables
 
 ## Developer Notes
 - install GCloud/Firebase CLI and setup account
