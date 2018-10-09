@@ -5,7 +5,7 @@ A simple web scraper that takes a snapshot of a target website. The keyword bein
 
 ## Features
 - [ ] wait for "orders" from HTTP
-- [ ] wait for "orders" from PubSub
+- [x] wait for "orders" from PubSub
 - [ ] navigate websites
 - [ ] take a screenshot
 - [ ] store the html contents
