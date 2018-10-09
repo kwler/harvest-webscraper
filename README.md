@@ -4,7 +4,7 @@
 A simple web scraper that takes a snapshot of a target website. The keyword being "simple"; this scraper can take in and store as much data as it can, perform navigation, and store the result in multiple formats, but will never perform data extraction/processing, that step will be performed further down the line on a different project. This protects us from having to deal with site restructuring messing up with data extraction.
 
 ## Features
-- [ ] wait for "orders" from HTTP
+- [x] wait for "orders" from HTTP
 - [x] wait for "orders" from PubSub
 - [ ] navigate websites
 - [ ] take a screenshot

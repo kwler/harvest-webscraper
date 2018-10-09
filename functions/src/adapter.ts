@@ -57,6 +57,11 @@ export async function pubSubToScraper(message: Message, context: EventContext) {
     await processInternal(messageToScraperRequest(message));
 }
 
+function httpRequestToScraperRequest(req: express.Request): ScraperRequest {
+    const scrapeRequest: ScraperRequest = ScraperRequest.from(req.body);
+    return scrapeRequest;
+}
+
 /**
  * converts a REST request into a scrape request
  * 
@@ -68,4 +73,8 @@ export async function httpToScraper(req: express.Request, resp: express.Response
     console.log(req);
     console.log("Response:");
     console.log(resp);
+
+    const response = await processInternal(httpRequestToScraperRequest(req));
+
+    resp.send(JSON.stringify(response));
 }
