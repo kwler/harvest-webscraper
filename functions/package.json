@@ -12,7 +12,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@types/lodash": "^4.14.116",
+    "@google-cloud/pubsub": "^0.20.1",
     "express": "^4.16.3",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",
+    "@types/lodash": "^4.14.116",
     "@types/mocha": "^5.2.5",
     "chai": "^4.2.0",
     "firebase-functions-test": "^0.1.3",

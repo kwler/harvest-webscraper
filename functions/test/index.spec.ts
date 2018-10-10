@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import 'mocha';
+import * as mocha from 'mocha';
 
 describe('index', () => {
 

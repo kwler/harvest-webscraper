@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import 'mocha';
+import * as mocha from 'mocha';
 
 import { Message } from "firebase-functions/lib/providers/pubsub";
 import { ScraperRequest, Scraper, ScraperResponse } from "../src/scraper";

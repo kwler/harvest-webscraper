@@ -2,9 +2,11 @@ import { Message } from "firebase-functions/lib/providers/pubsub";
 import { EventContext } from "firebase-functions";
 import * as express from "express";
 import { ScraperRequest, Scraper, ScraperResponse } from "./scraper";
+import * as PubSub from '@google-cloud/pubsub';
+import * as process from 'process';
 
 /**
- * 
+ * scrapes
  * @param request the scrape instructions
  * @returns the processed data
  */
@@ -14,6 +16,20 @@ async function processInternal(request: ScraperRequest): Promise<ScraperResponse
     console.log("Scraper Returned:");
     console.log(response);
     return response;
+}
+
+async function publishResult(response: ScraperResponse): Promise<void> {
+    const pubsubClient = new PubSub({
+    });
+
+    const topic = pubsubClient.topic(process.env.PUBSUB_TOPIC_OUTPUT);
+    const pubsubMessage = {
+        data: response
+    };
+
+    console.log(`Publishing Message to: ${process.env.PUBSUB_TOPIC_OUTPUT}`);
+    const pubId = await topic.publisher().publish(Buffer.from(JSON.stringify(pubsubMessage)));
+    console.log(`Message Published: ${pubId} to ${process.env.PUBSUB_TOPIC_OUTPUT}`);
 }
 
 /**
@@ -26,7 +42,9 @@ export async function pubSubToScraper(message: Message, context: EventContext) {
     const messageBody = message.data ? Buffer.from(message.data, 'base64').toString() : '{}';
     const scrapeRequest: ScraperRequest = ScraperRequest.from(JSON.parse(messageBody));
 
-    await processInternal(scrapeRequest);
+    const response = await processInternal(scrapeRequest);
+
+    await publishResult(response);
 }
 
 /**
@@ -37,6 +55,7 @@ export async function pubSubToScraper(message: Message, context: EventContext) {
  */
 export async function httpToScraper(req: express.Request, resp: express.Response) {
     const scrapeRequest: ScraperRequest = ScraperRequest.from(req.body);
+
     const response = await processInternal(scrapeRequest);
 
     resp.send(JSON.stringify(response));
