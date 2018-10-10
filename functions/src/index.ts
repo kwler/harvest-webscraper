@@ -1,9 +1,17 @@
+/**
+ * the firebase 'way' is so much easier to implement compared to the GCP API
+ */
 import * as functions from 'firebase-functions';
-import { pubSubToScraper, httpToScraper } from './adapter';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
+/**
+ * adapter.js translates firebase functions entry-point into the classical model,
+ * this way, we can keep on using fancy classes and convert the various forms of requests
+ * into what we intended to use
+ * 
+ * additionally we get to simplify index.js into human-glanceable single-liners to give
+ * us an overview of the functions that we are deploying
+ */
+import { pubSubToScraper, httpToScraper } from './adapter';
 
 /**
  * gcloud pubsub topics publish projects/PROJECT/topics/TOPIC --message '{"id":"test","initialPage":"https://google.com"}' 
