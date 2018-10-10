@@ -49,9 +49,7 @@ export class Scraper {
             waitUntil: 'networkidle0'
         });
 
-        const myElem = await page.$('head');
-        const myContents = await page.evaluate(el => el.innerHTML, myElem);
-        console.log(`Head: ${myContents.substring(0,1000)}`);
+        await this.log(page);
 
         const response = new ScraperResponse(request.id, res.ok());
 
@@ -59,6 +57,14 @@ export class Scraper {
         await browser.close();
 
         return response;
+    }
+
+    async log(page) {
+        const head = await page.evaluate(el => el.innerHTML, await page.$('head'));
+        console.log(`Head: ${head.substring(0,1000)}`);
+
+        const body = await page.evaluate(el => el.innerHTML, await page.$('body'));
+        console.log(`Body: ${body.substring(0,1000)}`);
     }
     
 }
