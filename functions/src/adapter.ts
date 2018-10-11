@@ -3,6 +3,7 @@ import { EventContext } from "firebase-functions";
 import * as express from "express";
 import { ScraperRequest, Scraper, ScraperResponse } from "./scraper";
 import * as PubSub from '@google-cloud/pubsub';
+import * as Storage from '@google-cloud/storage';
 import * as process from 'process';
 
 /**
@@ -15,6 +16,17 @@ async function processInternal(request: ScraperRequest): Promise<ScraperResponse
     const response = await scraper.scrape(request);
     console.log("Scraper Returned:");
     console.log(response);
+
+    const storageClient = new Storage({});
+    const bucket = storageClient.bucket(process.env.STORAGE_BUCKET);
+    const file = bucket.file(`${request.id}/index.json`);
+    const stream = file.createWriteStream({
+        metadata: {
+            contentType: 'application/json'
+        }
+    });
+    stream.end(Buffer.from(JSON.stringify(response)));
+
     return response;
 }
 
