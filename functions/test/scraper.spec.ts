@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Scraper, ScraperRequest } from '../src/scraper'
+import { Scraper, ScraperRequest, Step, StepType } from '../src/scraper'
 import 'mocha';
 
 describe('scraper', () => {
@@ -29,4 +29,24 @@ describe('scraper', () => {
         expect(myId).to.equal(response.id);
     });
     
+    it('should take a screenshot', async () => {
+        let scraper = new Scraper();
+        //TODO: write a test
+
+        const takeScreenshot = new Step();
+        takeScreenshot.order = 1;
+        takeScreenshot.type = StepType.SCREENSHOT;
+        takeScreenshot.config = new Map([
+            ['filename', 'file.jpg']
+        ]);
+
+        const req = new ScraperRequest();
+        req.id = 'testscreenshot';
+        req.initialPage = 'https://github.com/kwler';
+        req.steps = Array<Step>(takeScreenshot);
+
+        const resp = await scraper.scrape(req);
+
+        expect(true).to.equal(resp.success);
+    });
 });

@@ -1,10 +1,12 @@
 import * as puppeteer from 'puppeteer';
 import * as _ from 'lodash';
 
-enum StepType {
-    CLICK_ELEMENT,
-    SCREENSHOT,
-    STORE_HTML
+import * as Storage from '@google-cloud/storage';
+
+export enum StepType {
+    CLICK_ELEMENT = 'CLICK_ELEMENT',
+    SCREENSHOT = 'SCREENSHOT',
+    STORE_HTML = 'STORE_HTML'
 }
 
 export class Step {
@@ -77,9 +79,13 @@ export class Scraper {
         await this.log(page);
 
         const results = new Array<StepResult>();
-        request.steps.forEach(async step => {
-            results.push(await this.performStep(page, request, step));
-        });
+
+        if (request.steps) {
+            await this.performStep(page, request, request.steps[0]);
+        }
+        // request.steps.forEach(async step => {
+            // results.push(await this.performStep(page, request, step));
+        // });
 
         const response = new ScraperResponse(request.id, res.ok(), results);
 
@@ -92,10 +98,33 @@ export class Scraper {
     async performStep(page, request, step: Step): Promise<StepResult> {
         //TODO: perform step
         console.log(`Performing Step #${request.steps.indexOf(step)}: ${step.type}`);
+        console.log(step.config);
+
+        //if (step.type === StepType.SCREENSHOT) {
+            const screenshotTempLocation = `${request.id}-${step.config.get('filename')}`;
+            console.log(`Taking a screenshot: ${screenshotTempLocation}`);   
+            const screenshot = await page.screenshot({path: screenshotTempLocation});
+            console.log(`Screenshot Taken: ${screenshotTempLocation}`);
+
+            const fileLocation = `${request.id}/screenshots/${step.config["filename"]}`;
+            console.log(`Uploading: ${screenshotTempLocation} to ${fileLocation}`);
+            const storageClient = new Storage({});
+            const bucket = storageClient.bucket(process.env.STORAGE_BUCKET);
+            const file = bucket.file(fileLocation);
+            const stream = file.createWriteStream({
+                metadata: {
+                    contentType: 'image/png'
+                }
+            });
+            await stream.write(screenshot);
+            stream.close();
+
+       //    }
+
         return Promise.resolve(new StepResult(step, step.config));
     }
 
-    async log(page) {
+    async log(page): Promise<void> {
         const head = await page.evaluate(el => el.innerHTML, await page.$('head'));
         console.log(`Head: ${head.substring(0,1000)}`);
 
