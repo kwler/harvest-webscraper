@@ -14,7 +14,9 @@ import * as functions from 'firebase-functions';
 import { pubSubToScraper, httpToScraper } from './adapter';
 
 /**
- * gcloud pubsub topics publish projects/PROJECT/topics/TOPIC --message '{"id":"test","initialPage":"https://google.com"}' 
+ * gcloud pubsub topics publish projects/PROJECT/topics/TOPIC \
+ * --message \
+ * '{"id":"test2", "initialPage": "https://google.com", "steps": [{"order": 1, "type": "SCREENSHOT", "config": {"filename": "homepage.png", "width": "1080", "height":"750"}}]}'
  */
 export const harvestWebscraper = functions.pubsub.topic('harvest-webscraper').onPublish(pubSubToScraper);
 
@@ -22,6 +24,7 @@ export const harvestWebscraper = functions.pubsub.topic('harvest-webscraper').on
  * curl -X POST \
  * "https://REGION-PROJECT.cloudfunctions.net/FUNCTION" \
  * -H "Content-Type:application/json" \
- * --data '{"id":"test", "initialPage": "https://google.com"}'
+ * --data \
+ * '{"id":"test2", "initialPage": "https://google.com", "steps": [{"order": 1, "type": "SCREENSHOT", "config": {"filename": "homepage.png", "width": "1080", "height":"750"}}]}'
  */
 export const harvestWebscraperHTTP = functions.https.onRequest(httpToScraper);
