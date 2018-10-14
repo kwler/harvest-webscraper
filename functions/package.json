@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "test": "mocha --timeout 10000 -r ts-node/register test/**.spec.ts",
+    "test": "mocha --timeout 50000 -r ts-node/register test/**.spec.ts",
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
     "serve": "npm run build && firebase serve --only functions",
