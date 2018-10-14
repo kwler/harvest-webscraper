@@ -99,25 +99,21 @@ export class Scraper {
         console.log(`Performing Step #${request.steps.indexOf(step)}: ${step.type}`);
         console.log(step.config);
 
-        if (step.type === StepType.SCREENSHOT) {
-            const screenshotTempLocation = `${request.id}-${step.config['filename']}`;
-            console.log(`Taking a screenshot: ${screenshotTempLocation}`);   
-            const screenshot = await page.screenshot({path: screenshotTempLocation});
-            console.log(`Screenshot Taken: ${screenshotTempLocation}`);
-
-            const fileLocation = `${request.id}/screenshots/${step.config["filename"]}`;
-            console.log(`Uploading: ${screenshotTempLocation} to ${fileLocation}`);
+        if (step.type === StepType.SCREENSHOT) {   
             const storageClient = new Storage({});
             const bucket = storageClient.bucket(process.env.STORAGE_BUCKET);
+            
+            const fileLocation = `${request.id}/screenshots/${step.config["filename"]}`;
             const file = bucket.file(fileLocation);
             const stream = file.createWriteStream({
                 metadata: {
                     contentType: 'image/png'
                 }
             });
+            
+            const screenshot = await page.screenshot();
             await stream.write(screenshot);
-            stream.close();
-
+            stream.end();
         }
 
         return Promise.resolve(new StepResult(step, step.config));
