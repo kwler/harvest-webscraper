@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { Scraper, ScraperRequest, Step, StepType } from '../src/scraper'
 import 'mocha';
+import { isRegExp } from 'util';
 
 describe('scraper', () => {
 
@@ -43,10 +44,42 @@ describe('scraper', () => {
         const req = new ScraperRequest();
         req.id = 'testscreenshot';
         req.initialPage = 'https://github.com/kwler';
-        req.steps = Array<Step>(takeScreenshot);
+        //req.steps = Array<Step>(takeScreenshot);
 
         const resp = await scraper.scrape(req);
 
         expect(true).to.equal(resp.success);
+    });
+
+    it('should convert a json string into a proper request definition', () => {
+        const json: string = `{
+            "id": "test",
+            "initialPage": "https://google.com",
+            "steps": [{
+                "order": 1,
+                "type": "SCREENSHOT",
+                "config": {
+                    "filename": "homepage.png",
+                    "width": "1080",
+                    "height": "750"
+                }
+            }]
+        }`;
+
+        const result: ScraperRequest = ScraperRequest.from(JSON.parse(json));
+
+        expect("test").to.equals(result.id);
+        expect("https://google.com").to.equals(result.initialPage);
+
+        const step = result.steps[0];
+
+        expect(1).to.equals(step.order);
+        expect(StepType.SCREENSHOT).to.equals(step.type);
+
+        const config = step.config;
+
+        expect("homepage.png").to.equals(config['filename']);
+        expect("1080").to.equals(config['width']);
+        expect("750").to.equals(config["height"]);
     });
 });

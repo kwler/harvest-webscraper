@@ -81,11 +81,10 @@ export class Scraper {
         const results = new Array<StepResult>();
 
         if (request.steps) {
-            await this.performStep(page, request, request.steps[0]);
+            request.steps.forEach(async step => {
+                results.push(await this.performStep(page, request, step));
+            });
         }
-        // request.steps.forEach(async step => {
-            // results.push(await this.performStep(page, request, step));
-        // });
 
         const response = new ScraperResponse(request.id, res.ok(), results);
 
@@ -100,8 +99,8 @@ export class Scraper {
         console.log(`Performing Step #${request.steps.indexOf(step)}: ${step.type}`);
         console.log(step.config);
 
-        //if (step.type === StepType.SCREENSHOT) {
-            const screenshotTempLocation = `${request.id}-${step.config.get('filename')}`;
+        if (step.type === StepType.SCREENSHOT) {
+            const screenshotTempLocation = `${request.id}-${step.config['filename']}`;
             console.log(`Taking a screenshot: ${screenshotTempLocation}`);   
             const screenshot = await page.screenshot({path: screenshotTempLocation});
             console.log(`Screenshot Taken: ${screenshotTempLocation}`);
@@ -119,7 +118,7 @@ export class Scraper {
             await stream.write(screenshot);
             stream.close();
 
-       //    }
+        }
 
         return Promise.resolve(new StepResult(step, step.config));
     }
