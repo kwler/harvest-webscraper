@@ -81,9 +81,9 @@ export class Scraper {
         const results = new Array<StepResult>();
 
         if (request.steps) {
-            request.steps.forEach(async step => {
+            for(const step of request.steps) {
                 results.push(await this.performStep(page, request, step));
-            });
+            };
         }
 
         const response = new ScraperResponse(request.id, res.ok(), results);
