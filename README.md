@@ -11,7 +11,7 @@ A simple web scraper that takes a snapshot of a target website. The keyword bein
 - [ ] store the html contents
 - [x] write results to HTTP response
 - [x] write results to PubSub
-- [ ] write results to Cloud Storage
+- [x] write results to Cloud Storage
 - [ ] perform other commands aside from basic navigation
 - [ ] security
 - [ ] DoS mitigation
