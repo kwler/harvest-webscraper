@@ -5,7 +5,7 @@ import * as Storage from '@google-cloud/storage';
 
 export enum StepType {
     CLICK_ELEMENT = 'CLICK_ELEMENT',
-    SCREENSHOT = 'SCREENSHOT',
+    STORE_SCREENSHOT = 'STORE_SCREENSHOT',
     STORE_HTML = 'STORE_HTML',
     STORE_PDF = 'STORE_PDF'
 }
@@ -103,8 +103,8 @@ export class Scraper {
         const storageClient = new Storage({});
         const bucket = storageClient.bucket(process.env.STORAGE_BUCKET);
 
-        if (step.type === StepType.SCREENSHOT) {
-            const fileLocation = `${request.id}/screenshots/${step.config["filename"]}`;
+        if (step.type === StepType.STORE_SCREENSHOT) {
+            const fileLocation = `${request.id}/${step.config["filename"]}`;
             const file = bucket.file(fileLocation);
             const stream = file.createWriteStream({
                 metadata: {
@@ -117,7 +117,7 @@ export class Scraper {
             await stream.write(screenshot);
             stream.end();
         } else if (step.type === StepType.STORE_PDF) {
-            const fileLocation = `${request.id}/pdf/${step.config["filename"]}`;
+            const fileLocation = `${request.id}/${step.config["filename"]}`;
             const file = bucket.file(fileLocation);
             const stream = file.createWriteStream({
                 metadata: {
@@ -129,6 +129,19 @@ export class Scraper {
             const pdf = await page.pdf({width: '1920px', height: '1080px'});
             await stream.write(pdf);
             stream.end();
+        } else if (step.type === StepType.STORE_HTML) {
+            const fileLocation = `${request.id}/${step.config["filename"]}`;
+            const file = bucket.file(fileLocation);
+            const stream = file.createWriteStream({
+                metadata: {
+                    contentType: 'application/html'
+                }
+            });
+
+            const body = await page.evaluate(el => el.innerHTML, await page.$('body'));
+            stream.end(body);
+        } else {
+            console.warn(`NoOp: No handler fro the following step: ${step.type}`);
         }
 
         return Promise.resolve(new StepResult(step, step.config));

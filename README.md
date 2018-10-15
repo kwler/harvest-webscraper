@@ -7,8 +7,8 @@ A simple web scraper that takes a snapshot of a target website. The keyword bein
 - [x] wait for "orders" from HTTP
 - [x] wait for "orders" from PubSub
 - [ ] navigate websites
-- [ ] take a screenshot
-- [ ] store the html contents
+- [x] take a screenshot
+- [x] store the html contents
 - [x] write results to HTTP response
 - [x] write results to PubSub
 - [x] write results to Cloud Storage
@@ -22,7 +22,7 @@ A simple web scraper that takes a snapshot of a target website. The keyword bein
 - [x] unit tests
 - [ ] unit test mocks
 - [ ] integration tests running on local emulator
-- [ ] environment variables
+- [x] environment variables
 
 ## Developer Notes
 - install GCloud/Firebase CLI and setup account
