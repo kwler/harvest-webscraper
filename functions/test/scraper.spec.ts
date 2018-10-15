@@ -57,7 +57,7 @@ describe('scraper', () => {
             "initialPage": "https://google.com",
             "steps": [{
                 "order": 1,
-                "type": "SCREENSHOT",
+                "type": "STORE_SCREENSHOT",
                 "config": {
                     "filename": "homepage.png",
                     "width": "1080",
