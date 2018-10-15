@@ -36,7 +36,7 @@ describe('scraper', () => {
 
         const takeScreenshot = new Step();
         takeScreenshot.order = 1;
-        takeScreenshot.type = StepType.SCREENSHOT;
+        takeScreenshot.type = StepType.STORE_SCREENSHOT;
         takeScreenshot.config = new Map([
             ['filename', 'file.jpg']
         ]);
@@ -74,7 +74,7 @@ describe('scraper', () => {
         const step = result.steps[0];
 
         expect(1).to.equals(step.order);
-        expect(StepType.SCREENSHOT).to.equals(step.type);
+        expect(StepType.STORE_SCREENSHOT).to.equals(step.type);
 
         const config = step.config;
 
