@@ -19,6 +19,7 @@ import { pubSubToScraper, httpToScraper } from './adapter';
  * '{"id":"test2", "initialPage": "https://google.com", "steps": [{"order": 1, "type": "SCREENSHOT", "config": {"filename": "homepage.png", "width": "1080", "height":"750"}}]}'
  */
 export const harvestWebscraper = functions.pubsub.topic('harvest-webscraper').onPublish(pubSubToScraper);
+export const harvestWebscraperAsia = functions.region('asia-northeast1').pubsub.topic('harvest-webscraper-asia').onPublish(pubSubToScraper);
 
 /**
  * curl -X POST \
@@ -28,3 +29,4 @@ export const harvestWebscraper = functions.pubsub.topic('harvest-webscraper').on
  * '{"id":"test2", "initialPage": "https://google.com", "steps": [{"order": 1, "type": "SCREENSHOT", "config": {"filename": "homepage.png", "width": "1080", "height":"750"}}]}'
  */
 export const harvestWebscraperHTTP = functions.https.onRequest(httpToScraper);
+export const harvestWebscraperHTTPAsia = functions.region('asia-northeast1').https.onRequest(httpToScraper);
